@@ -5,7 +5,8 @@ const User = require('../models/users')
 const Posts = require('../models/posts')
 const jwt = require('jsonwebtoken');
 const expressjwt = require('express-jwt')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const nestedreplies = require('../models/comments');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 require('dotenv/config')
@@ -18,27 +19,23 @@ exports.SignUp = async (req,res)=>{
         fullname: req.body.fullname,
         password:req.body.password
     });
-    const AlreadyUser = await User.findOne({"username":req.body.username})
-    if(AlreadyUser.username === req.body.username){
-        return res.status(400).json("Same username is already used. Try different")
-    }
-    else{
-    const salt = await bcrypt.genSalt(10)
-    user.password = await bcrypt.hash(user.password, salt)
-    console.log("req.body",req.body)
-    const result = user.save((err,success)=>{
-        if(err){
-          
-            console.log("err ",err)
-         
+    
+     const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+    console.log("req.body",user);
+    const result = await user.save((err,success)=>{
+        if(err.name === 'MongoError' || err.code === '11000' ){
+      
+           return res.json("username has already taken. try different one.")
         }
-        res.json(success)
-    })}
+        res.json(success);
+    })
     
 }
     catch(err){
         console.log("err",err)
     }
+    
 }
 
 exports.signin = async (req,res)=>{
@@ -87,7 +84,7 @@ exports.isAuthenticated =  (req,res,next)=>{
     if(!checker) return res.status(403).json({
         error:( "Access Denied")
     })
-    console.log("fff",req.auth)
+    
     next();
 }
 

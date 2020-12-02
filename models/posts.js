@@ -1,4 +1,6 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const nestedreplies = require('./comments');
+
 
 const reqString = {
     type:String,
@@ -6,20 +8,13 @@ const reqString = {
        
 }
 
+
 const postSchema = mongoose.Schema({
     post_name: reqString,
     user: reqString,
     user_id: reqString,
     text: reqString,
-    comments:[{
-        username:reqString,
-        comment:reqString,
-        replies:[{
-            username:reqString,
-            to: reqString,
-            reply:reqString
-        }]
-    },{timestamps: true}]
+    comments:[nestedreplies.schema]
 
 },{timestamps:true})
 

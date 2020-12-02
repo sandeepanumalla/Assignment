@@ -12,6 +12,9 @@ mongoose.connect('mongodb+srv://Sandeep:Sandeep@cluster0.vybdl.mongodb.net/test'
 .catch(err => {
     console.log(`error connecting db`)
 })
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useUnifiedTopology', true);
+mongoose.set('useFindAndModify', false);
 const userRoute = require('./routes/user')
 
 

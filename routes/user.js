@@ -5,12 +5,14 @@ const router =  express.Router();
 const bodyParser = require('body-parser');
 const { createPosts, getPostById } = require("../controller/posts");
 const { response } = require("express");
-
+const { comment, deleteComment } = require("../controller/comment");
+const { reply } = require("../controller/reply");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.param('userId',getUserById);
 router.param('postId',getPostById);
+
 
 router.get('',(req,res)=>{
     res.send("hello ji")
@@ -26,6 +28,10 @@ router.post('/signout',signout);
 
 router.get('/getuser/:userId',isSignedIn,isAuthenticated,getUser);
 router.post('/new-post/:userId',isSignedIn,isAuthenticated,createPosts);
-router.post('/new-comment/:userId/:postId',isSignedIn,isAuthenticated,getPostById,);
+router.post('/new-comment/:userId/:postId',isSignedIn,isAuthenticated,getPostById,comment);
+router.post('/new-reply/:userId/:postId/:commentId',isSignedIn,isAuthenticated,getPostById,reply);
+router.get('/delete-reply/:userId/:postId/:commentId',isSignedIn,isAuthenticated,getPostById,deleteComment);
+
+
 
 module.exports = router;

@@ -1,7 +1,8 @@
 const Posts = require('../models/posts');
 const express = require('express');
 const app = new express();
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const nestedreplies = require('../models/comments');
 
 
 exports.createPosts = async (req,res)=>{
@@ -10,7 +11,7 @@ exports.createPosts = async (req,res)=>{
         post.user_id = req.profile._id;
     console.log(req.body)
     console.log(req.profile)
-    
+    post.ma
     const result = post.save((err,success)=>{
         if(err){
             console.log("error pushing the posts",err)
@@ -27,11 +28,18 @@ exports.createPosts = async (req,res)=>{
 }
 
 exports.getPostById =(req,res,next,id)=>{
-    Posts.findById({_id: id}).exec((err,success)=>{
+    console.log("id",id);
+    Posts.findOne({_id: id}).exec((err,success)=>{
         if(err || !success){
             res.json("Either post has been deleted")
         }
-        return res.posts = success;
+        console.log("req.postss",success)
+         req.post = success;
         next();
     })
 }
+
+
+
+
+
