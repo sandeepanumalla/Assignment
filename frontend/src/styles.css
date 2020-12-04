@@ -1,0 +1,76 @@
+.btn,
+.jumbotron,
+.nav :hover {
+  border-radius: 1px;
+}
+.bg-light {
+  background-color: #f8f9fa!important;
+  
+}
+.eachcourse:hover {
+  opacity: 0.9;
+  transition: all 0.3s ease;
+  position: relative;
+  background: #fff;
+  -webkit-box-sizing: 1px 1px 1px 1px rgba(34,36,38,.15);
+
+  margin: 1rem 1rem 1rem 1rem ;
+ 
+  
+}
+@media (min-width: 576px){
+.jumbotron {
+    padding: 0.3rem;
+}
+}
+.author{
+  font-weight: 700;
+}
+.bg-dark {
+  background-color: #35393d!important;
+  height: 61px;
+}
+.upper-post-wrapper{
+
+  background-color: #f8f9fa;
+}
+.post-wrapper {
+ 
+}
+
+.each-post {
+  border: 1px solid;
+  width: 60%;
+  min-height: 60px;
+  border-radius: 4px;
+  margin-left: 20%;
+  margin-bottom: 10px;
+}
+.nav-link {
+  display: flex;
+  border: white;
+  margin-top: 10px;
+  padding: .5rem 1rem;
+}
+
+.get{
+  border-radius: 3px;
+  padding: 10px;
+  padding-left: 7px;
+  width: 135px;
+  padding-right: 7px;
+}
+.display-4 {
+  padding-top: 10px;
+  font-size: 2.1rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+.float{
+  
+}
+
+
+body {
+  background: #343a40;
+}
